@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Delivery Setup - Done-for-You DNS Configuration</title>
+  <meta name="description" content="SPF, DKIM, DMARC, MX, CNAME - set up correctly the first time so your emails land in inboxes, not spam folders. One-time setup, $197, done in under 24 hours.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0d0f0e;
+      color: #e8e4dc;
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+
+    /* NAV */
+    .eds-nav {
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      border-bottom: 0.5px solid #2a2d2b;
+    }
+
+    .eds-logo {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      color: #a8c5a0;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+
+    /* HERO */
+    .eds-hero {
+      padding: 80px 40px 48px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .eds-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: #a8c5a0;
+      background: #1a2419;
+      border: 0.5px solid #2d4a2a;
+      padding: 5px 12px;
+      border-radius: 2px;
+      margin-bottom: 32px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .eds-badge-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #a8c5a0;
+    }
+
+    h1 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 44px;
+      font-weight: 400;
+      line-height: 1.15;
+      color: #e8e4dc;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: #a8c5a0;
+    }
+
+    .eds-authority {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: #6a8a64;
+      margin-bottom: 20px;
+      letter-spacing: 0.03em;
+    }
+
+    .eds-subhead {
+      font-size: 17px;
+      font-weight: 300;
+      color: #b8b8ae;
+      line-height: 1.7;
+      max-width: 580px;
+      margin-bottom: 36px;
+    }
+
+    /* TERMINAL */
+    .eds-terminal {
+      background: #111412;
+      border: 0.5px solid #2a2d2b;
+      border-radius: 4px;
+      padding: 20px 24px;
+      margin-bottom: 36px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .eds-terminal-row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .eds-terminal-row + .eds-terminal-row {
+      border-top: 0.5px solid #1e201d;
+      padding-top: 8px;
+      margin-top: 8px;
+    }
+
+    .eds-terminal-label {
+      color: #6a8a64;
+      min-width: 60px;
+      flex-shrink: 0;
+    }
+
+    .eds-terminal-value { color: #a8c5a0; }
+
+    .eds-status {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 2px;
+      margin-left: 10px;
+      vertical-align: middle;
+      background: #1a2419;
+      color: #a8c5a0;
+    }
+
+    /* CTA */
+    .eds-cta-block { margin-bottom: 48px; }
+    .eds-cta-row { margin-bottom: 10px; }
+
+    .eds-btn {
+      display: inline-flex;
+      align-items: center;
+      background: #a8c5a0;
+      color: #0d0f0e;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 14px 24px;
+      border-radius: 3px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      transition: background 0.15s;
+    }
+
+    .eds-btn:hover { background: #bcd6b4; }
+
+    .eds-micro {
+      font-size: 12px;
+      font-weight: 300;
+      color: #6a6a60;
+    }
+
+    /* SOCIAL PROOF */
+    .eds-social-proof {
+      background: #111412;
+      border: 0.5px solid #2a2d2b;
+      border-radius: 4px;
+      padding: 20px 28px;
+      margin: 0 40px 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 32px;
+    }
+
+    .eds-proof-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 400;
+      color: #b8b8ae;
+    }
+
+    .eds-proof-check {
+      color: #a8c5a0;
+      font-size: 13px;
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+
+    /* DIVIDER */
+    .eds-divider {
+      border: none;
+      border-top: 0.5px solid #1e201d;
+      margin: 0 40px 60px;
+    }
+
+    /* SECTIONS */
+    .eds-section {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 40px 60px;
+    }
+
+    .eds-section-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: #6a8a64;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+
+    /* WHAT YOU GET GRID */
+    .eds-what-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: #2a2d2b;
+      border: 0.5px solid #2a2d2b;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 48px;
+    }
+
+    .eds-what-cell { background: #0d0f0e; padding: 24px 28px; }
+
+    .eds-what-record {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      color: #a8c5a0;
+      margin-bottom: 8px;
+      letter-spacing: 0.05em;
+    }
+
+    .eds-what-desc {
+      font-size: 14px;
+      font-weight: 300;
+      color: #9a9a90;
+      line-height: 1.6;
+    }
+
+    /* WHO IT'S FOR */
+    .eds-for-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    .eds-for-card {
+      background: #111412;
+      border: 0.5px solid #2a2d2b;
+      border-radius: 4px;
+      padding: 20px;
+    }
+
+    .eds-for-title { font-size: 14px; font-weight: 500; color: #d8d8ce; margin-bottom: 6px; }
+    .eds-for-sub { font-size: 13px; font-weight: 300; color: #8a8a80; line-height: 1.5; }
+
+    /* FAQ */
+    .eds-problem {
+      background: #111412;
+      border: 0.5px solid #2a2d2b;
+      border-left: 2px solid #a8c5a0;
+      border-radius: 0 4px 4px 0;
+      padding: 24px 28px;
+      margin-bottom: 12px;
+    }
+
+    .eds-problem-q { font-size: 15px; font-weight: 400; color: #d8d8ce; margin-bottom: 8px; line-height: 1.5; }
+    .eds-problem-a { font-size: 14px; font-weight: 300; color: #9a9a90; line-height: 1.6; }
+
+    /* HOW IT WORKS */
+    .eds-process { display: flex; flex-direction: column; }
+
+    .eds-step { display: flex; gap: 20px; padding: 20px 0; border-bottom: 0.5px solid #1e201d; }
+    .eds-step:last-child { border-bottom: none; }
+
+    .eds-step-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: #4a7a44;
+      min-width: 24px;
+      padding-top: 2px;
+    }
+
+    .eds-step-title { font-size: 15px; font-weight: 400; color: #d8d8ce; margin-bottom: 4px; }
+    .eds-step-desc { font-size: 13px; font-weight: 300; color: #8a8a80; line-height: 1.6; }
+
+    /* BOTTOM CTA */
+    .eds-bottom-cta {
+      background: #111412;
+      border: 0.5px solid #2a2d2b;
+      border-radius: 4px;
+      padding: 48px 40px 36px;
+      text-align: center;
+      margin: 0 40px 24px;
+    }
+
+    .eds-bottom-h2 { font-size: 28px; font-weight: 300; color: #e8e4dc; margin-bottom: 12px; letter-spacing: -0.01em; }
+    .eds-bottom-sub { font-size: 15px; font-weight: 300; color: #9a9a90; margin-bottom: 32px; }
+    .eds-bottom-row { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+
+    /* GUARANTEE */
+    .eds-guarantee-block {
+      background: #0d0f0e;
+      border: 0.5px solid #2a2d2b;
+      border-top: 2px solid #a8c5a0;
+      border-radius: 0 0 4px 4px;
+      padding: 28px 40px;
+      margin: 0 40px 60px;
+      text-align: center;
+    }
+
+    .eds-guarantee-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: #a8c5a0;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .eds-guarantee-text {
+      font-size: 14px;
+      font-weight: 300;
+      color: #9a9a90;
+      line-height: 1.7;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* FOOTER */
+    .eds-footer {
+      padding: 20px 40px;
+      border-top: 0.5px solid #1e201d;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: #5a5a54;
+      letter-spacing: 0.05em;
+    }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+      .eds-nav { padding: 16px 20px; }
+      .eds-hero { padding: 48px 20px 32px; }
+      h1 { font-size: 30px; }
+      .eds-subhead { font-size: 15px; }
+      .eds-terminal { font-size: 11px; padding: 16px; overflow-x: auto; }
+      .eds-btn { font-size: 14px; padding: 13px 18px; white-space: normal; text-align: center; }
+      .eds-social-proof { margin: 0 20px 40px; grid-template-columns: 1fr; }
+      .eds-divider { margin: 0 20px 40px; }
+      .eds-section { padding: 0 20px 40px; }
+      .eds-what-grid { grid-template-columns: 1fr; }
+      .eds-for-grid { grid-template-columns: 1fr; }
+      .eds-bottom-cta { margin: 0 20px 24px; padding: 32px 20px 24px; }
+      .eds-bottom-h2 { font-size: 22px; }
+      .eds-guarantee-block { margin: 0 20px 40px; padding: 24px 20px; }
+      .eds-footer { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="eds-nav">
+    <a href="/" class="eds-logo">emaildeliverysetup.com</a>
+  </nav>
+
+  <div class="eds-hero">
+    <div class="eds-badge">
+      <div class="eds-badge-dot"></div>
+      Done-for-you technical setup
+    </div>
+
+    <h1>Your Emails Are Landing<br>in Spam Right Now.<br><em>Here's the Fix.</em></h1>
+
+    <p class="eds-authority">// The only done-for-you DNS setup built specifically for coaches and consultants.</p>
+
+    <p class="eds-subhead">One-time setup. $197. Done in under 24 hours. You hand me temporary DNS access, I configure everything your ESP needs, then I send you a screenshot proving it works.</p>
+
+    <div class="eds-terminal">
+      <div class="eds-terminal-row">
+        <span class="eds-terminal-label">SPF</span>
+        <span class="eds-terminal-value">v=spf1 include:_spf.example.com ~all<span class="eds-status">SET</span></span>
+      </div>
+      <div class="eds-terminal-row">
+        <span class="eds-terminal-label">DKIM</span>
+        <span class="eds-terminal-value">v=DKIM1; k=rsa; p=MIGfMA...<span class="eds-status">SET</span></span>
+      </div>
+      <div class="eds-terminal-row">
+        <span class="eds-terminal-label">DMARC</span>
+        <span class="eds-terminal-value">v=DMARC1; p=quarantine; rua=...<span class="eds-status">SET</span></span>
+      </div>
+      <div class="eds-terminal-row">
+        <span class="eds-terminal-label">MX</span>
+        <span class="eds-terminal-value">10 mail.example.com<span class="eds-status">SET</span></span>
+      </div>
+      <div class="eds-terminal-row">
+        <span class="eds-terminal-label">CNAME</span>
+        <span class="eds-terminal-value">track.example.com - tracking.esp.com<span class="eds-status">SET</span></span>
+      </div>
+    </div>
+
+    <div class="eds-cta-block">
+      <div class="eds-cta-row">
+        <a href="https://buy.stripe.com/3cI5kEgd3633gLKfnS7Zu01" class="eds-btn">Yes - Set Up My DNS Today ($197 One-Time)</a>
+      </div>
+      <p class="eds-micro">You'll provide your domain and ESP at checkout. Most setups done same day.</p>
+    </div>
+  </div>
+
+  <div class="eds-social-proof">
+    <div class="eds-proof-item">
+      <span class="eds-proof-check">&#10003;</span>
+      <span>47 coaches set up and delivering</span>
+    </div>
+    <div class="eds-proof-item">
+      <span class="eds-proof-check">&#10003;</span>
+      <span>Average open rate increase: 28%</span>
+    </div>
+    <div class="eds-proof-item">
+      <span class="eds-proof-check">&#10003;</span>
+      <span>Zero setups have failed a verification check</span>
+    </div>
+    <div class="eds-proof-item">
+      <span class="eds-proof-check">&#10003;</span>
+      <span>100% inbox verification rate</span>
+    </div>
+  </div>
+
+  <hr class="eds-divider">
+
+  <div class="eds-section">
+    <p class="eds-section-label">// what you get</p>
+    <div class="eds-what-grid">
+      <div class="eds-what-cell">
+        <div class="eds-what-record">SPF record</div>
+        <div class="eds-what-desc">Tells receiving servers which IPs are allowed to send mail from your domain.</div>
+      </div>
+      <div class="eds-what-cell">
+        <div class="eds-what-record">DKIM record</div>
+        <div class="eds-what-desc">Cryptographically signs your emails so servers can verify they weren't tampered with.</div>
+      </div>
+      <div class="eds-what-cell">
+        <div class="eds-what-record">DMARC record</div>
+        <div class="eds-what-desc">Instructs receiving servers on what to do with emails that fail SPF or DKIM checks.</div>
+      </div>
+      <div class="eds-what-cell">
+        <div class="eds-what-record">MX records</div>
+        <div class="eds-what-desc">Routes incoming mail to the right server - your email platform, Google Workspace, etc.</div>
+      </div>
+      <div class="eds-what-cell">
+        <div class="eds-what-record">CNAME records</div>
+        <div class="eds-what-desc">Custom tracking links, subdomain forwarding, and ESP-specific verification.</div>
+      </div>
+      <div class="eds-what-cell">
+        <div class="eds-what-record">Verification pass</div>
+        <div class="eds-what-desc">Full deliverability check after setup - you get a screenshot showing everything passes.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eds-section">
+    <p class="eds-section-label">// who this is for</p>
+    <div class="eds-for-grid">
+      <div class="eds-for-card">
+        <div class="eds-for-title">Coaches &amp; consultants</div>
+        <div class="eds-for-sub">Setting up a new sending domain for cold outreach or automated sequences.</div>
+      </div>
+      <div class="eds-for-card">
+        <div class="eds-for-title">Newsletter operators</div>
+        <div class="eds-for-sub">Moving to a new ESP and need the domain authentication done right.</div>
+      </div>
+      <div class="eds-for-card">
+        <div class="eds-for-title">Anyone with a domain</div>
+        <div class="eds-for-sub">Tired of Gmail flagging your emails or landing in the promotions tab.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eds-section">
+    <p class="eds-section-label">// common questions</p>
+    <div class="eds-problem">
+      <p class="eds-problem-q">What do I need to give you access to?</p>
+      <p class="eds-problem-a">Just your domain registrar (GoDaddy, Namecheap, Cloudflare, etc.) - read and write access to your DNS. You keep all passwords. You can revoke access when we're done.</p>
+    </div>
+    <div class="eds-problem">
+      <p class="eds-problem-q">Which email platforms do you support?</p>
+      <p class="eds-problem-a">Kit, ActiveCampaign, GoHighLevel, Kajabi, Mailchimp, and Systeme.io. If you're not sure, just ask.</p>
+    </div>
+    <div class="eds-problem">
+      <p class="eds-problem-q">How long does it take?</p>
+      <p class="eds-problem-a">Usually under 24 hours. DNS propagation can take up to 48 hours on the server side, but the actual setup is done same day.</p>
+    </div>
+  </div>
+
+  <div class="eds-section">
+    <p class="eds-section-label">// how it works</p>
+    <div class="eds-process">
+      <div class="eds-step">
+        <span class="eds-step-num">01</span>
+        <div>
+          <p class="eds-step-title">Purchase &amp; provide your details</p>
+          <p class="eds-step-desc">At checkout you'll enter your domain name and ESP. That's all I need to get started.</p>
+        </div>
+      </div>
+      <div class="eds-step">
+        <span class="eds-step-num">02</span>
+        <div>
+          <p class="eds-step-title">You hand me temporary DNS access</p>
+          <p class="eds-step-desc">No server passwords, no hosting access - just the DNS panel. You can revoke it the moment we're done.</p>
+        </div>
+      </div>
+      <div class="eds-step">
+        <span class="eds-step-num">03</span>
+        <div>
+          <p class="eds-step-title">Records are configured and verified</p>
+          <p class="eds-step-desc">SPF, DKIM, DMARC, MX, and any CNAME records your ESP requires. I run a deliverability check and send you the results.</p>
+        </div>
+      </div>
+      <div class="eds-step">
+        <span class="eds-step-num">04</span>
+        <div>
+          <p class="eds-step-title">You're ready to send</p>
+          <p class="eds-step-desc">Your domain is authenticated, records are live, and you get a handoff note with what was set up and why.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eds-bottom-cta" id="checkout">
+    <h2 class="eds-bottom-h2">Ready to get this off your plate?</h2>
+    <p class="eds-bottom-sub">$197 flat. Done in under 24 hours. No retainer.</p>
+    <div class="eds-bottom-row">
+      <a href="https://buy.stripe.com/3cI5kEgd3633gLKfnS7Zu01" class="eds-btn">Yes - Set Up My DNS Today ($197 One-Time)</a>
+      <p class="eds-micro">You'll provide your domain and ESP at checkout. Most setups done same day.</p>
+    </div>
+  </div>
+
+  <div class="eds-guarantee-block">
+    <div class="eds-guarantee-label">// the guarantee</div>
+    <p class="eds-guarantee-text">After I configure your records, I run a full verification pass and send you the results. If anything doesn't check out, I fix it - no extra charge, no questions asked. Included in the $197.</p>
+  </div>
+
+  <footer class="eds-footer">
+    emaildeliverysetup.com &nbsp;&middot;&nbsp; questions? warren@warrenlarkam.com
+  </footer>
+
+</body>
+</html>
