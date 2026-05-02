@@ -37,7 +37,6 @@
       text-decoration: none;
     }
 
-    /* HERO */
     .eds-hero {
       padding: 80px 40px 48px;
       max-width: 760px;
@@ -92,7 +91,6 @@
       margin-bottom: 36px;
     }
 
-    /* TERMINAL */
     .eds-terminal {
       background: #111412;
       border: 0.5px solid #2a2d2b;
@@ -119,7 +117,6 @@
       color: #a8c5a0;
     }
 
-    /* CTA */
     .eds-cta-block { margin-bottom: 48px; }
     .eds-cta-row { margin-bottom: 10px; }
 
@@ -141,10 +138,8 @@
     }
 
     .eds-btn:hover { background: #bcd6b4; }
-
     .eds-micro { font-size: 13px; font-weight: 300; color: #6a6a60; }
 
-    /* SOCIAL PROOF - constrained to match page width */
     .eds-social-proof {
       background: #111412;
       border: 0.5px solid #2a2d2b;
@@ -168,22 +163,26 @@
 
     .eds-proof-check { color: #a8c5a0; font-size: 15px; font-weight: 500; flex-shrink: 0; }
 
-    .eds-divider { border: none; border-top: 0.5px solid #1e201d; max-width: 760px; margin: 0 auto 60px; }
+    .eds-divider { border: none; border-top: 0.5px solid #1e201d; max-width: 760px; margin: 0 auto 70px; }
 
-    /* SECTIONS */
-    .eds-section { max-width: 760px; margin: 0 auto; padding: 0 40px 70px; }
+    .eds-section { max-width: 760px; margin: 0 auto; padding: 0 40px 80px; }
 
-    .eds-section-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 12px;
-      font-weight: 500;
-      color: #6a8a64;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 32px;
+    /* Section headings - large and obvious */
+    .eds-section-heading {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 36px;
+      font-weight: 400;
+      color: #e8e4dc;
+      letter-spacing: -0.02em;
+      margin-bottom: 36px;
+      line-height: 1.1;
     }
 
-    /* WHAT YOU GET */
+    .eds-section-heading em {
+      font-style: normal;
+      color: #a8c5a0;
+    }
+
     .eds-what-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -208,14 +207,12 @@
 
     .eds-what-desc { font-size: 16px; font-weight: 300; color: #9a9a90; line-height: 1.65; }
 
-    /* WHO IT'S FOR */
     .eds-for-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 48px; }
 
     .eds-for-card { background: #111412; border: 0.5px solid #2a2d2b; border-radius: 4px; padding: 24px; }
     .eds-for-title { font-size: 17px; font-weight: 500; color: #d8d8ce; margin-bottom: 8px; }
     .eds-for-sub { font-size: 15px; font-weight: 300; color: #8a8a80; line-height: 1.6; }
 
-    /* FAQ */
     .eds-problem {
       background: #111412;
       border: 0.5px solid #2a2d2b;
@@ -228,9 +225,8 @@
     .eds-problem-q { font-size: 18px; font-weight: 400; color: #d8d8ce; margin-bottom: 10px; line-height: 1.4; }
     .eds-problem-a { font-size: 16px; font-weight: 300; color: #9a9a90; line-height: 1.7; }
 
-    /* HOW IT WORKS */
     .eds-process { display: flex; flex-direction: column; }
-    .eds-step { display: flex; gap: 24px; padding: 24px 0; border-bottom: 0.5px solid #1e201d; }
+    .eds-step { display: flex; gap: 24px; padding: 28px 0; border-bottom: 0.5px solid #1e201d; }
     .eds-step:last-child { border-bottom: none; }
 
     .eds-step-num {
@@ -239,13 +235,12 @@
       font-weight: 500;
       color: #4a7a44;
       min-width: 28px;
-      padding-top: 3px;
+      padding-top: 4px;
     }
 
-    .eds-step-title { font-size: 18px; font-weight: 400; color: #d8d8ce; margin-bottom: 6px; }
+    .eds-step-title { font-size: 18px; font-weight: 400; color: #d8d8ce; margin-bottom: 8px; }
     .eds-step-desc { font-size: 16px; font-weight: 300; color: #8a8a80; line-height: 1.7; }
 
-    /* BOTTOM CTA */
     .eds-bottom-cta {
       background: #111412;
       border: 0.5px solid #2a2d2b;
@@ -260,7 +255,6 @@
     .eds-bottom-sub { font-size: 17px; font-weight: 300; color: #9a9a90; margin-bottom: 36px; }
     .eds-bottom-row { display: flex; flex-direction: column; align-items: center; gap: 12px; }
 
-    /* GUARANTEE */
     .eds-guarantee-block {
       background: #0d0f0e;
       border: 0.5px solid #2a2d2b;
@@ -284,7 +278,6 @@
 
     .eds-guarantee-text { font-size: 16px; font-weight: 300; color: #9a9a90; line-height: 1.7; max-width: 560px; margin: 0 auto; }
 
-    /* FOOTER */
     .eds-footer {
       padding: 20px 40px;
       border-top: 0.5px solid #1e201d;
@@ -294,7 +287,6 @@
       letter-spacing: 0.05em;
     }
 
-    /* MOBILE */
     @media (max-width: 600px) {
       .eds-nav { padding: 16px 20px; }
       .eds-hero { padding: 48px 20px 32px; }
@@ -304,6 +296,7 @@
       .eds-btn { font-size: 15px; padding: 14px 18px; white-space: normal; text-align: center; }
       .eds-social-proof { padding: 20px; grid-template-columns: 1fr; }
       .eds-section { padding: 0 20px 48px; }
+      .eds-section-heading { font-size: 26px; }
       .eds-what-grid { grid-template-columns: 1fr; }
       .eds-for-grid { grid-template-columns: 1fr; }
       .eds-bottom-cta { padding: 36px 20px 28px; }
@@ -329,7 +322,7 @@
 
     <p class="eds-authority">// The only done-for-you DNS setup built specifically for coaches and consultants.</p>
 
-    <p class="eds-subhead">One-time setup. $197. Done in under 24 hours. You hand me temporary DNS access, I configure everything your ESP needs, then I send you a screenshot proving it works.</p>
+    <p class="eds-subhead">One-time setup. $197. Done in under 24 hours. You hand me temporary DNS access, I configure everything your ESP needs, then I send you a full verification report confirming everything is configured correctly.</p>
 
     <div class="eds-terminal">
       <div class="eds-terminal-row">
@@ -384,7 +377,7 @@
   <hr class="eds-divider">
 
   <div class="eds-section">
-    <p class="eds-section-label">// what you get</p>
+    <h2 class="eds-section-heading">// What you <em>get</em></h2>
     <div class="eds-what-grid">
       <div class="eds-what-cell">
         <div class="eds-what-record">SPF record</div>
@@ -407,14 +400,14 @@
         <div class="eds-what-desc">Custom tracking links, subdomain forwarding, and ESP-specific verification.</div>
       </div>
       <div class="eds-what-cell">
-        <div class="eds-what-record">Verification pass</div>
-        <div class="eds-what-desc">Full deliverability check after setup - you get a screenshot showing everything passes.</div>
+        <div class="eds-what-record">Verification report</div>
+        <div class="eds-what-desc">Full deliverability check after setup - you receive a report confirming everything passes.</div>
       </div>
     </div>
   </div>
 
   <div class="eds-section">
-    <p class="eds-section-label">// who this is for</p>
+    <h2 class="eds-section-heading">// Who this <em>is for</em></h2>
     <div class="eds-for-grid">
       <div class="eds-for-card">
         <div class="eds-for-title">Coaches &amp; consultants</div>
@@ -432,7 +425,7 @@
   </div>
 
   <div class="eds-section">
-    <p class="eds-section-label">// common questions</p>
+    <h2 class="eds-section-heading">// Common <em>questions</em></h2>
     <div class="eds-problem">
       <p class="eds-problem-q">What do I need to give you access to?</p>
       <p class="eds-problem-a">Just your domain registrar (GoDaddy, Namecheap, Cloudflare, etc.) - read and write access to your DNS. You keep all passwords. You can revoke access when we're done.</p>
@@ -448,7 +441,7 @@
   </div>
 
   <div class="eds-section">
-    <p class="eds-section-label">// how it works</p>
+    <h2 class="eds-section-heading">// How it <em>works</em></h2>
     <div class="eds-process">
       <div class="eds-step">
         <span class="eds-step-num">01</span>
@@ -468,7 +461,7 @@
         <span class="eds-step-num">03</span>
         <div>
           <p class="eds-step-title">Records are configured and verified</p>
-          <p class="eds-step-desc">SPF, DKIM, DMARC, MX, and any CNAME records your ESP requires. I run a deliverability check and send you the results.</p>
+          <p class="eds-step-desc">SPF, DKIM, DMARC, MX, and any CNAME records your ESP requires. I run a full deliverability check and send you the verification report.</p>
         </div>
       </div>
       <div class="eds-step">
